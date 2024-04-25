@@ -3,14 +3,34 @@ import { KarabinerRules } from "./types";
 import { createHyperSubLayers, app, open, rectangle } from "./utils";
 
 const rules: KarabinerRules[] = [
+  // Disable caps_lock
+  {
+    description: "Disable Caps Lock",
+    manipulators: [
+      {
+        from: {
+          key_code: "caps_lock",
+          modifiers: {
+            optional: ["any"],
+          },
+        },
+        to: [
+          {
+            key_code: "left_control",
+          },
+        ],
+        type: "basic",
+      },
+    ],
+  },
   // Define the Hyper key itself
   {
     description: "Hyper Key (⌃⌥⇧⌘)",
     manipulators: [
       {
-        description: "Caps Lock -> Hyper Key",
+        description: "Function Key -> Hyper Key",
         from: {
-          key_code: "caps_lock",
+          key_code: "fn",
           modifiers: {
             optional: ["any"],
           },
@@ -33,7 +53,7 @@ const rules: KarabinerRules[] = [
         ],
         to_if_alone: [
           {
-            key_code: "escape",
+            key_code: "fn"
           },
         ],
         type: "basic",
@@ -68,35 +88,30 @@ const rules: KarabinerRules[] = [
       f: open("https://facebook.com"),
       r: open("https://reddit.com"),
     },
-    // o = "Open" applications
-    o: {
+    // a = Open "a"pplications
+    a: {
       1: app("1Password"),
-      g: app("Google Chrome"),
-      c: app("Notion Calendar"),
+      g: app("Tower"),
+      c: app("Fantastical"),
       v: app("Visual Studio Code"),
-      d: app("Discord"),
-      s: app("Slack"),
-      e: app("Superhuman"),
-      n: app("Notion"),
-      t: app("Warp"),
+      d: app("DEVONthink"),
+      s: app("Safari"),
+      l: app("Slack"),
+      n: app("Nova"),
+      t: app("Prompt"),
       // Open todo list managed via *H*ypersonic
-      h: open(
-        "notion://www.notion.so/stellatehq/7b33b924746647499d906c55f89d5026"
-      ),
+      h: open("Home"),
       z: app("zoom.us"),
       // "M"essages
-      m: app("Texts"),
-      f: app("Finder"),
-      r: app("Texts"),
+      m: app("Messages"),
+      f: app("FireFox"),
+      r: app("RubyMine"),
       // "i"Message
-      i: app("Texts"),
-      p: app("Spotify"),
+      i: app("Instagram"),
+      p: app("Plexamp"),
       a: app("iA Presenter"),
       // "W"hatsApp has been replaced by Texts
-      w: open("Texts"),
-      l: open(
-        "raycast://extensions/stellate/mxstbr-commands/open-mxs-is-shortlink"
-      ),
+      w: open("Asana"),
     },
 
     // w = "Window" via rectangle.app
@@ -311,6 +326,7 @@ const rules: KarabinerRules[] = [
         "raycast://extensions/raycast/emoji-symbols/search-emoji-symbols"
       ),
       c: open("raycast://extensions/raycast/system/open-camera"),
+      i: open("raycast://extensions/thomas/color-picker/pick-color"),
       p: open("raycast://extensions/raycast/raycast/confetti"),
       a: open("raycast://extensions/raycast/raycast-ai/ai-chat"),
       s: open("raycast://extensions/peduarte/silent-mention/index"),
